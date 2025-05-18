@@ -53,59 +53,203 @@ using namespace std;
 //-Nhập từng số một bằng `ReadConsole`
 //- Chuyển chuỗi sang số(`atoi`, `strtol`)
 //	- Tính và in kết quả bằng `WriteConsole`
+//int main() {
+//	HANDLE h_thong_bao = GetStdHandle(STD_OUTPUT_HANDLE);
+//	char thong_bao[100] = "MAY TINH PHEP TOAN a + b:\nNhap a: ";
+//	DWORD ki_tu_thuc_su_in;
+//	WriteConsoleA(
+//		h_thong_bao,
+//		thong_bao,
+//		(DWORD)strlen(thong_bao),
+//		&ki_tu_thuc_su_in,
+//		NULL
+//	);
+//	HANDLE h_nhap = GetStdHandle(STD_INPUT_HANDLE);
+//	char a[100];
+//	DWORD so_luong_ki_tu_thuc_su_nhap;
+//	ReadConsoleA(
+//		h_nhap,
+//		a,
+//		100,
+//		&so_luong_ki_tu_thuc_su_nhap,
+//		NULL
+//	); 
+//	char thong_bao_nhap_b[100] = "Nhap b: ";
+//	DWORD ki_tu_thuc_su_in_b;
+//	WriteConsoleA(
+//		h_thong_bao,
+//		thong_bao_nhap_b,
+//		(DWORD)strlen(thong_bao_nhap_b),
+//		&ki_tu_thuc_su_in_b,
+//		NULL
+//	);
+//	char b[100];
+//	DWORD ki_tu_thuc_su_nhap_b;
+//	ReadConsoleA(
+//		h_nhap,
+//		b,
+//		100,
+//		&ki_tu_thuc_su_nhap_b,
+//		NULL
+//	);
+//	int results = atoi(a) + atoi(b);
+//	
+//	string string_results = to_string(results);
+//	
+//	DWORD real_out_put;
+//	string ketQua = "Ket qua phep tinh la: " + string_results;
+//	//cout << typeid(ketQua).name() << endl;
+//	//cout << ketQua << endl;
+//	//cout << "ok" << endl;
+//	WriteConsoleA(
+//		h_thong_bao,
+//		ketQua.c_str(),
+//		(DWORD)size(ketQua),
+//		&real_out_put,
+//		NULL
+//	);
+//}
+//### ** Bài 4: Tạo menu đơn giản trong console * *
+//
+//-Hiển thị :
+//
+//```
+//markdown
+//Sao chépChỉnh sửa
+//1. Tính tổng
+//2. Tính hiệu
+//3. Thoát
+//
+//```
+//
+//- Người dùng chọn mục bằng nhập số
+//- Thực hiện hành động tương ứng
 int main() {
-	HANDLE h_thong_bao = GetStdHandle(STD_OUTPUT_HANDLE);
-	char thong_bao[100] = "MAY TINH PHEP TOAN a + b:\nNhap a: ";
-	DWORD ki_tu_thuc_su_in;
+	HANDLE h_in = GetStdHandle(STD_INPUT_HANDLE);
+	HANDLE h_out = GetStdHandle(STD_OUTPUT_HANDLE);
+	char messenge[] = "1. Tinh tong\n2.Tinh hieu\n3.Thoat\nNhap chuc nang ban mong muon: ";
+	DWORD ki_tu_in_ra;
 	WriteConsoleA(
-		h_thong_bao,
-		thong_bao,
-		(DWORD)strlen(thong_bao),
-		&ki_tu_thuc_su_in,
+		h_out,
+		messenge,
+		(DWORD)strlen(messenge),
+		&ki_tu_in_ra,
 		NULL
 	);
-	HANDLE h_nhap = GetStdHandle(STD_INPUT_HANDLE);
-	char a[100];
-	DWORD so_luong_ki_tu_thuc_su_nhap;
+	char input[100];
+	DWORD ki_tu_nhap_vao;
 	ReadConsoleA(
-		h_nhap,
-		a,
+		h_in,
+		input,
 		100,
-		&so_luong_ki_tu_thuc_su_nhap,
-		NULL
-	); 
-	char thong_bao_nhap_b[100] = "Nhap b: ";
-	DWORD ki_tu_thuc_su_in_b;
-	WriteConsoleA(
-		h_thong_bao,
-		thong_bao_nhap_b,
-		(DWORD)strlen(thong_bao_nhap_b),
-		&ki_tu_thuc_su_in_b,
+		&ki_tu_nhap_vao,
 		NULL
 	);
-	char b[100];
-	DWORD ki_tu_thuc_su_nhap_b;
-	ReadConsoleA(
-		h_nhap,
-		b,
-		100,
-		&ki_tu_thuc_su_nhap_b,
-		NULL
-	);
-	int results = atoi(a) + atoi(b);
-	
-	string string_results = to_string(results);
-	
-	DWORD real_out_put;
-	string ketQua = "Ket qua phep tinh la: " + string_results;
-	//cout << typeid(ketQua).name() << endl;
-	//cout << ketQua << endl;
-	//cout << "ok" << endl;
-	WriteConsoleA(
-		h_thong_bao,
-		ketQua.c_str(),
-		(DWORD)size(ketQua),
-		&real_out_put,
-		NULL
-	);
+	int nhap = atoi(input);
+	if (nhap == 1) {
+		char notion_sum[] = "Thuc hien chuc nang tinh tong a + b.\nNhap a: ";
+		WriteConsoleA(
+			h_out,
+			notion_sum,
+			(DWORD)strlen(notion_sum),
+			&ki_tu_in_ra,
+			NULL
+		);
+		char a[100];
+		ReadConsoleA(
+			h_in,
+			a,
+			100,
+			&ki_tu_nhap_vao,
+			NULL
+		);
+		char notion_input_b[] = "Nhap b: ";
+		WriteConsoleA(
+			h_out,
+			notion_input_b,
+			(DWORD)strlen(notion_input_b),
+			&ki_tu_in_ra,
+			NULL
+		);
+		char b[100];
+		ReadConsoleA(
+			h_in,
+			b,
+			100,
+			&ki_tu_nhap_vao,
+			NULL
+		);
+		int tong = atoi(a) + atoi(b);
+		string results = "Ket qua phep tinh a + b la: " + to_string(tong);
+		WriteConsoleA(
+			h_out,
+			results.c_str(),
+			(DWORD)size(results),
+			&ki_tu_in_ra,
+			NULL
+		);
+	}
+	else if (nhap == 2) {
+		char notion_tru[] = "Thuc hien chuc nang tinh hieu a - b.\nNhap a: ";
+		WriteConsoleA(
+			h_out,
+			notion_tru,
+			(DWORD)strlen(notion_tru),
+			&ki_tu_in_ra,
+			NULL
+		);
+		char a[100];
+		ReadConsoleA(
+			h_in,
+			a,
+			100,
+			&ki_tu_nhap_vao,
+			NULL
+		);
+		char notion_b[] = "Nhap b: ";
+		WriteConsoleA(
+			h_out,
+			notion_b,
+			(DWORD)strlen(notion_b),
+			&ki_tu_in_ra,
+			NULL
+		);
+		char b[100];
+		ReadConsoleA(
+			h_in,
+			b,
+			100,
+			&ki_tu_nhap_vao,
+			NULL
+		);
+		int results = atoi(a) - atoi(b);
+		string  out = "Ket qua phep tinh a - b la: " + to_string(results);
+		WriteConsoleA(
+			h_out,
+			out.c_str(),
+			(DWORD)size(out),
+			&ki_tu_in_ra,
+			NULL
+		);
+	}
+	else if (nhap == 3) {
+		char notion[] = "Thoat chuong trinh thanh cong \n";
+		WriteConsoleA(
+			h_out,
+			notion,
+			(DWORD)strlen(notion),
+			&ki_tu_in_ra,
+			NULL
+		);
+	}
+	else {
+		char error[] = "Vui long nhap mot trong cac chuc nang co ben tren. Khoi dong lai chuong trinh di";
+		WriteConsoleA(
+			h_in,
+			error,
+			(DWORD)strlen(error),
+			&ki_tu_in_ra,
+			NULL
+		);
+	}
 }
